@@ -1,1 +1,359 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator_UKK</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    	* {
+    color: gainsboro !important;
+}
+
+    	body {
+/*    visibility: hidden;*/
+}
+button{
+	background-color: white;
+	border: 0px ;
+}
+        .message-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 10px;
+/*            border: 1px solid #ddd;*/
+            border-radius: 8px;
+            background-color: white;
+            text-decoration: none;
+               color: gainsboro;
+           }
+
+        .message-box {
+            position: relative;
+            margin-bottom: 10px;
+            padding: 10px;
+/*            border: 1px solid #ddd;*/
+            border-radius: 8px;
+            background-color: #fff;
+            transition: all 0.3s ease-in-out;
+            width: 300px;  /* Ukuran default lebih kecil */
+            height: 200px; /* Ukuran default lebih kecil */
+            max-width: 100%; /* Menghindari box melebihi lebar kontainer */
+            overflow: auto;
+            text-decoration: none;
+        }
+
+        .message-box:last-child {
+            margin-bottom: 0;
+        }
+
+        .resize-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+/*            background-color: #007bff;*/
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+      
+        .message-box.small {
+            width: 300px;
+            height: 200px;
+        }
+
+        .message-box.large {
+            width: 800px;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+	  <button onclick="toggleVisibility()">Toggle Body</button>
+    <div class="message-container">
+        <div class="message-box small">
+            <button class="resize-btn" onclick="toggleSize(this)">S</button>
+            <!-- <h3>HTML</h3> -->
+            <pre>
+                &lt;!DOCTYPE html&gt;
+                &lt;html lang="en"&gt;
+                &lt;head&gt;
+                    &lt;meta charset="UTF-8"&gt;
+                    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                    &lt;title&gt;Kalkulator Online&lt;/title&gt;
+                    &lt;link rel="stylesheet" href="style.css"&gt;
+                    &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"&gt;
+                &lt;/head&gt;
+
+                &lt;body&gt;
+                &lt;div class="container"&gt;
+                    &lt;div class="switch"&gt;
+                        &lt;h1&gt;Kalkulator Online&lt;/h1&gt;
+                        &lt;div class="theme"&gt;
+                            &lt;button class="item" id="tema" onclick="theme()"&gt;
+                                &lt;i class="fa-solid fa-moon"&gt;&lt;/i&gt;
+                            &lt;/button&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="calculator"&gt;
+                        &lt;input type="text" id="screen" class="screen" disabled /&gt;
+                        &lt;!-- Buttons and layout code here --&gt;
+                    &lt;/div&gt;
+                    &lt;div class="instructions"&gt;
+                        &lt;h3&gt;Instruksi&lt;/h3&gt;
+                        &lt;p&gt;&lt;span&gt;Enter&lt;/span&gt;: Menampilkan hasil perhitungan.&lt;/p&gt;
+                        &lt;p&gt;&lt;span&gt;Delete&lt;/span&gt;: Menghapus semua input (reset).&lt;/p&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;/body&gt;
+                &lt;/html&gt;
+            </pre>
+        </div>
+
+        <div class="message-box small">
+            <button class="resize-btn" onclick="toggleSize(this)">S</button>
+            <!-- <h3>CSS</h3> -->
+            <pre>
+                body {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100vh;
+                    background-color: #212529;
+                    color: white;
+                    margin: 0;
+                    font-family: Arial, sans-serif;
+                }
+
+                .container {
+                    display: flex;
+                    gap: 20px;
+                    align-items: flex-start;
+                }
+
+                .calculator {
+                    background-color: #333;
+                    padding: 20px;
+                    border-radius: 10px;
+                    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+                    width: 320px;
+                    transition: transform 0.3s ease;
+                }
+
+                .calculator:hover {
+                    transform: scale(1.05);
+                }
+
+                .screen {
+                    background-color: black;
+                    color: white;
+                    font-size: 2rem;
+                    border: none;
+                    border-radius: 5px;
+                    margin-bottom: 20px;
+                    text-align: right;
+                    padding: 0.15rem;
+                    width: 100%;
+                    overflow-x: auto;
+                    white-space: nowrap;
+                    transition: opacity 0.3s ease;
+                }
+
+                .screen::-webkit-scrollbar {
+                    height: 4px;
+                }
+
+                .screen::-webkit-scrollbar-thumb {
+                    background: #444;
+                    border-radius: 2px;
+                }
+
+                .btn {
+                    font-size: 1.5rem;
+                    margin: 5px;
+                    border: none;
+                    border-radius: 5px;
+                    width: 70px;
+                    height: 70px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    transition: background-color 0.3s, transform 0.2s;
+                }
+
+                .btn:hover {
+                    background-color: #444;
+                    transform: scale(1.1);
+                }
+
+                .btn:active {
+                    box-shadow: inset 0 0 5px #000;
+                }
+
+                .btn-row {
+                    display: flex;
+                    justify-content: space-between;
+                }
+
+                .btn-dark {
+                    background-color: #555;
+                    color: white;
+                }
+
+                .btn-dark:hover {
+                    background-color: #666;
+                }
+
+                .btn-success {
+                    background-color: #28a745;
+                    color: white;
+                }
+
+                .btn-success:hover {
+                    background-color: #218838;
+                }
+
+                .instructions {
+                    background-color: #444;
+                    padding: 20px;
+                    border-radius: 10px;
+                    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+                    max-width: 220px;
+                    font-size: 0.9rem;
+                    line-height: 1.6;
+                    color: white;
+                }
+
+                .instructions p {
+                    margin: 0 0 10px;
+                }
+
+                .instructions p span {
+                    font-weight: bold;
+                    color: #17a2b8;
+                }
+            </pre>
+        </div>
+
+        <div class="message-box small">
+            <button class="resize-btn" onclick="toggleSize(this)">S</button>
+            <!-- <h3>JavaScript</h3> -->
+            <pre>
+                const screen = document.getElementById('screen');
+                const operationDisplay = document.createElement('div');
+                operationDisplay.style.textAlign = 'right';
+                operationDisplay.style.fontWeight = 'bold';
+                operationDisplay.style.marginBottom = '5px';
+                screen.parentNode.insertBefore(operationDisplay, screen);
+
+                let numbers = [], operators = [], isResultDisplayed = false;
+
+                function addInput(val) {
+                    if (isResultDisplayed) return;
+                    if ('+-*/'.includes(val)) {
+                        numbers.push(parseFloat(screen.value));
+                        operators.push(val);
+                        operationDisplay.textContent +=  \${screen.value} \${val};
+                        screen.value = '';
+                    } else {
+                        screen.value += val;
+                        screen.scrollLeft = screen.scrollWidth;
+                    }
+                    screen.style.opacity = 0;
+                    setTimeout(() => screen.style.opacity = 1, 50);
+                }
+
+                function clearScreen() {
+                    screen.value = '';
+                    numbers = [];
+                    operators = [];
+                    operationDisplay.textContent = '';
+                    isResultDisplayed = false;
+                }
+
+                function deleteLast() {
+                    if (isResultDisplayed) return;
+                    if (!screen.value && numbers.length) {
+                        operationDisplay.textContent = operationDisplay.textContent.trim().split(' ').slice(0, -2).join(' ');
+                        numbers.pop(); operators.pop();
+                    } else {
+                        screen.value = screen.value.slice(0, -1);
+                    }
+                }
+
+                function calculate() {
+                    if (!screen.value || !operators.length) return;
+
+                    numbers.push(parseFloat(screen.value));
+                    let r = numbers[0];
+
+                    for (let i = 0; i < operators.length; i++) {
+                        let n = numbers[i + 1];
+                        let o = operators[i];
+
+                        if (o === '+') {
+                            r = r + n;
+                        } else if (o === '-') {
+                            r = r - n;
+                        } else if (o === '*') {
+                            r = r * n;
+                        } else if (o === '/') {
+                            r = n !== 0 ? r / n : r; // hindari pembagian dengan nol
+                        }
+                    }
+
+                    operationDisplay.textContent +=  \${screen.value} =;
+                    screen.value = r;
+                    numbers = [r];
+                    operators = [];
+                    isResultDisplayed = true;
+                }
+
+                document.addEventListener('keydown', e => {
+                    if ('0123456789.'.includes(e.key)) addInput(e.key);
+                    if ('+-*/'.includes(e.key)) addInput(e.key);
+                    if (e.key === 'Enter') calculate();
+                    if (e.key === 'Delete') clearScreen();
+                    if (e.key === 'Backspace') deleteLast();
+                });
+
+                function theme() {
+                    document.body.classList.toggle('light-mode');
+                    screen.classList.toggle('light-mode');
+                    document.querySelector('.calculator').classList.toggle('light-mode');
+                    document.querySelector('.instructions').classList.toggle('light-mode');
+                }
+
+         
+            </pre>
+        </div>
+    </div>
+    <script type="text/javascript">
+    	    let hidden = false;
+    function toggleVisibility() {
+      hidden = !hidden;
+      document.body.style.visibility = hidden ? "hidden" : "visible";
+    }
+
+          function toggleSize(button) {
+                    const box = button.closest('.message-box');
+                    if (box.classList.contains('small')) {
+                        box.classList.remove('small');
+                        box.classList.add('large');
+                        button.innerHTML = 'M'; // tombol untuk mengurangi ukuran
+                    } else {
+                        box.classList.remove('large');
+                        box.classList.add('small');
+                        button.innerHTML = 'S'; // tombol untuk memperbesar ukuran
+                    }
+                }
+</script>
+</body>
+</html>
